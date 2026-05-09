@@ -173,7 +173,7 @@ export default function Home() {
                     </button>
                   </div>
                 </div>
-                <p className="whitespace-pre-wrap text-lg leading-relaxed">{result.text}</p>
+                <p dir="rtl" className="whitespace-pre-wrap text-lg leading-relaxed text-right" style={{ fontFamily: 'Tahoma, Arial, sans-serif', letterSpacing: '0.05em' }}>{result.text}</p>
               </div>
             )}
           </div>
@@ -248,11 +248,7 @@ export default function Home() {
           </div>
         )}
 
-        {/* Footer */}
-        <div className="mt-16 text-center text-gray-600 text-sm">
-          <p>EasyOCR-based Persian text recognition</p>
         </div>
-      </div>
     </div>
   )
 }
