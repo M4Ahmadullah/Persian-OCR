@@ -121,16 +121,30 @@ export default function Home() {
         {/* Single Mode */}
         {mode === 'single' && (
           <div className="space-y-6">
-            <div className="border-2 border-dashed border-gray-800 rounded-xl p-12 text-center hover:border-gray-700 transition-colors cursor-pointer relative">
+            <label className="border-2 border-dashed border-gray-800 rounded-xl p-8 text-center hover:border-gray-700 transition-colors cursor-pointer block">
               <input
                 type="file"
                 accept="image/*"
-                onChange={(e) => e.target.files?.[0] && setFile(e.target.files[0])}
-                className="absolute inset-0 opacity-0 cursor-pointer"
+                onChange={(e) => {
+                  if (e.target.files?.[0]) {
+                    setFile(e.target.files[0])
+                  }
+                }}
+                className="hidden"
               />
-              <Upload className="w-10 h-10 mx-auto mb-4 text-gray-600" />
-              <p className="text-gray-400">{file ? file.name : 'Click or drag image here'}</p>
-            </div>
+              {file ? (
+                <div className="py-2">
+                  <p className="text-white font-medium mb-1">{file.name}</p>
+                  <p className="text-gray-500 text-sm">{(file.size / 1024 / 1024).toFixed(2)} MB</p>
+                  <p className="text-gray-600 text-sm mt-2">Click to change</p>
+                </div>
+              ) : (
+                <>
+                  <Upload className="w-10 h-10 mx-auto mb-4 text-gray-600" />
+                  <p className="text-gray-400">Click or drag image here</p>
+                </>
+              )}
+            </label>
 
             {file && (
               <button
@@ -168,17 +182,32 @@ export default function Home() {
         {/* Batch Mode */}
         {mode === 'batch' && (
           <div className="space-y-6">
-            <div className="border-2 border-dashed border-gray-800 rounded-xl p-12 text-center hover:border-gray-700 transition-colors cursor-pointer relative">
+            <label className="border-2 border-dashed border-gray-800 rounded-xl p-8 text-center hover:border-gray-700 transition-colors cursor-pointer block">
               <input
                 type="file"
                 accept="image/*"
                 multiple
                 onChange={(e) => e.target.files && setFiles(Array.from(e.target.files))}
-                className="absolute inset-0 opacity-0 cursor-pointer"
+                className="hidden"
               />
-              <Upload className="w-10 h-10 mx-auto mb-4 text-gray-600" />
-              <p className="text-gray-400">{files.length > 0 ? `${files.length} files selected` : 'Click or drag images here'}</p>
-            </div>
+              {files.length > 0 ? (
+                <div className="py-2">
+                  <p className="text-white font-medium mb-2">{files.length} files selected</p>
+                  <div className="max-h-32 overflow-y-auto text-sm text-gray-400">
+                    {files.slice(0, 5).map((f, i) => (
+                      <p key={i}>{f.name}</p>
+                    ))}
+                    {files.length > 5 && <p>...and {files.length - 5} more</p>}
+                  </div>
+                  <p className="text-gray-600 text-sm mt-2">Click to change</p>
+                </div>
+              ) : (
+                <>
+                  <Upload className="w-10 h-10 mx-auto mb-4 text-gray-600" />
+                  <p className="text-gray-400">Click or drag images here</p>
+                </>
+              )}
+            </label>
 
             {files.length > 0 && (
               <button
