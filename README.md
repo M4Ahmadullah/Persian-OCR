@@ -1,5 +1,9 @@
 # Persian OCR System
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![EasyOCR](https://img.shields.io/badge/EasyOCR-black?style=flat-square)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=next.js&logoColor=white)
+
 A complete local Persian OCR system using EasyOCR with a web interface.
 
 ## Features
